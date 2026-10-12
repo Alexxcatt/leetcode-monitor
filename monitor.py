@@ -79,16 +79,33 @@ def get_daily_submissions(submission_calendar, day=None):
     return 0
 
 
+def parse_user_config(user):
+    """返回（力扣用户名，显示名称），并兼容旧的字符串配置。"""
+    if isinstance(user, str):
+        return user, user
+    if isinstance(user, dict):
+        username = user.get('username', '').strip()
+        display_name = user.get('display_name', '').strip() or username
+        if username:
+            return username, display_name
+    raise ValueError(
+        '用户配置格式错误：请使用用户名字符串，或包含 username 的对象'
+    )
+
+
 def do_monitor():
     config = project_config.load_config()
     users = config['users']
     results = []
     today = datetime.now(CHINA_TIMEZONE).date()
     for user in users:
-        submission_calendar = get_user_submission_calendar(user)
+        username, display_name = parse_user_config(user)
+        submission_calendar = get_user_submission_calendar(username)
         last_day_date, last_day_submissions = get_last_submission(submission_calendar)
         today_submissions = get_daily_submissions(submission_calendar, today)
-        results.append((user, today_submissions, last_day_date, last_day_submissions))
+        results.append(
+            (display_name, today_submissions, last_day_date, last_day_submissions)
+        )
 
     output_lines = [f"力扣每日打卡（中国时间 {today.isoformat()}）"]
     for name, today_submissions, last_day_date, last_day_submissions in results:

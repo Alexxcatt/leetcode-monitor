@@ -33,10 +33,18 @@ python -m pip install -r requirements.txt
 
 ```json
 "users": [
-  "gracious-leavittnie",
-  "friend-user-slug"
+  {
+    "username": "gracious-leavittnie",
+    "display_name": "Alexcat"
+  },
+  {
+    "username": "friend-user-slug",
+    "display_name": "朋友昵称"
+  }
 ]
 ```
+
+`username` 用于查询力扣中国站，`display_name` 只用于结果展示。也继续支持原有的用户名字符串写法。
 
 4.默认使用 `"channel_type": "console"`，只在终端和 GitHub Actions 摘要中输出，不需要 webhook。
 

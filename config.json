@@ -2,7 +2,10 @@
   "channel_type": "console",
   "webhook_url": "",
   "users": [
-    "gracious-leavittnie"
+    {
+      "username": "gracious-leavittnie",
+      "display_name": "Alexcat"
+    }
   ],
   "hour": 9,
   "minute": 0,
