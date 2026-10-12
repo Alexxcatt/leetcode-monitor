@@ -17,25 +17,48 @@
 
 `git clone https://github.com/HMYDK/leetcode-monitor.git`
 
-2.修改users列表，添加要查询的用户
+2.创建独立的 Python 环境并安装依赖
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+3.修改 users 列表，添加要查询的用户
 
 `修改config.json文件中的users列表`
 
-3.修改`config.json`中最后发送结果的webhook地址
+`users` 支持多个力扣中国站用户名，例如：
 
-4.运行脚本
+```json
+"users": [
+  "gracious-leavittnie",
+  "friend-user-slug"
+]
+```
 
-`python monitor.py`
+4.默认使用 `"channel_type": "console"`，只在终端和 GitHub Actions 摘要中输出，不需要 webhook。
 
-5.借助github action定时执行程序，发送监控消息
+5.运行脚本
 
-- 修改`.github/workflows/python-app.yml`中的`cron`
+```bash
+python monitor.py
+```
+
+6.借助 GitHub Actions 定时执行程序
+
+- 将本项目放到你自己的 GitHub 仓库。
+- 在仓库的 **Actions** 页面启用 workflow。
+- 可在 **Daily Job** 中点击 **Run workflow** 手动测试。
+- 默认每天 15:55 UTC（中国时间 23:55）运行；GitHub 定时任务可能略有延迟。
+- 此控制台模式不需要 GitHub Secrets，结果可在每次 workflow 的运行摘要和日志中查看。
 
 
 
 ### 注意事项
 - LeetCode官方API可能会限制请求频率，请勿频繁调用
-- 需要提前准备好钉钉机器人webhook地址
+- 只有启用钉钉或 Telegram 消息时才需要相应配置。不要将 webhook、Token、Cookie 或密码提交到公开仓库；应使用 GitHub Actions Secrets。
 
 ### 示例输出
 ![image](https://github.com/HMYDK/leetcode-monitor/assets/27269137/9867d903-2b67-413c-b67f-463fa51fce37)

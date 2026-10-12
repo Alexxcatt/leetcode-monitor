@@ -1,15 +1,13 @@
 {
-  "channel_type": "dingding",
-  "webhook_url": "https://oapi.dingtalk.com/robot/send?access_token=ed5117bd15d23ce4d52c77d284e6f461de874ffcd5782177da7c9cabd0d514da",
+  "channel_type": "console",
+  "webhook_url": "",
   "users": [
-    "dijia-light",
-    "huang-wei-v",
-    "nei-jin-shi"
+    "gracious-leavittnie"
   ],
   "hour": 9,
   "minute": 0,
   "telegram_config": {
-    "bot_token": "your bot token",
-    "chat_id": "your chat id"
+    "bot_token": "",
+    "chat_id": ""
   }
 }
